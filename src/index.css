@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: #0A0A0F;
+  color: #F4F4F5;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+.font-display {
+  font-family: 'Syne', sans-serif;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Gradient border para la card del usuario logueado */
+.gradient-border {
+  background:
+    linear-gradient(#111118, #111118) padding-box,
+    linear-gradient(135deg, #7C3AED, #06B6D4) border-box;
+  border: 1.5px solid transparent;
+}
+
+/* Glow accent */
+.glow-accent {
+  box-shadow: 0 0 24px rgba(124, 58, 237, 0.18), 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Scrollbar oculto para chips */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
