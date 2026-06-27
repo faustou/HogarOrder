@@ -57,7 +57,7 @@ export default function SwipeCard({ object, uploaderName, onResolve, resolving }
         style={{ background: '#111118', border: '1px solid #1E1E2E', minHeight: 0 }}
       >
         {/* Foto */}
-        <div className="relative flex-1 overflow-hidden" style={{ background: '#0A0A0F', minHeight: 0 }}>
+        <div className="relative overflow-hidden" style={{ background: '#0A0A0F', flex: 1, minHeight: 0, maxHeight: '44vh' }}>
           {object.image_url ? (
             <img src={object.image_url} alt={object.name} className="w-full h-full object-cover" />
           ) : (

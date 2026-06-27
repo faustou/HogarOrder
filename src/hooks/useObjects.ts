@@ -16,6 +16,7 @@ export function useObjects(userId: string) {
       .from('objects')
       .select('*')
       .eq('status', 'pending')
+      .neq('uploaded_by', userId)
       .order('queue_position', { ascending: true })
       .limit(1)
       .maybeSingle()
