@@ -4,7 +4,6 @@ import { supabase } from '../../lib/supabase'
 import { useWeeklyScores } from '../../hooks/useWeeklyScores'
 import { usePoints } from '../../hooks/usePoints'
 import { uploadsNeededToResolve } from '../../lib/rules'
-import { getMondayOfCurrentWeek } from '../../lib/rules'
 import type { UserProfile } from '../../types'
 
 interface RecentTx {
