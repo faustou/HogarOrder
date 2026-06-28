@@ -100,46 +100,62 @@ export default function SwipeCard({ object, uploaderName, onResolve, resolving }
         </div>
       </div>
 
-      {/* Modal inline dejar_con */}
+      {/* Bottom sheet dejar_con — fixed, fuera del flujo */}
       {pendingAction === 'dejar_con' && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="rounded-2xl p-4 flex flex-col gap-3"
-          style={{ background: '#111118', border: '1px solid #1E1E2E' }}
-        >
-          <p className="text-sm font-medium" style={{ color: '#A1A1AA' }}>¿Por qué lo dejás?</p>
-          <textarea
-            value={explanation}
-            onChange={e => setExplanation(e.target.value)}
-            placeholder="Justificá el motivo..."
-            rows={2}
-            className="rounded-xl px-3 py-2.5 text-sm outline-none resize-none"
-            style={{
-              background: '#0A0A0F', border: '1px solid #1E1E2E',
-              color: '#F4F4F5',
-            }}
-            onFocus={e => { e.target.style.borderColor = '#7C3AED' }}
-            onBlur={e => { e.target.style.borderColor = '#1E1E2E' }}
+        <div className="fixed inset-0 z-50 flex flex-col justify-end">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute inset-0"
+            style={{ background: 'rgba(0,0,0,0.7)' }}
+            onClick={() => setPendingAction(null)}
           />
-          <div className="flex gap-2">
-            <button
-              onClick={() => setPendingAction(null)}
-              className="flex-1 rounded-xl py-2.5 text-sm font-medium"
-              style={{ background: '#1E1E2E', color: '#71717A' }}
+          {/* Sheet */}
+          <motion.div
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+            className="relative flex flex-col gap-4 px-4 pt-5 pb-8 rounded-t-3xl"
+            style={{ background: '#111118', border: '1px solid #1E1E2E' }}
+          >
+            <div className="w-10 h-1 rounded-full mx-auto mb-1" style={{ background: '#2E2E3E' }} />
+            <p
+              className="font-display text-base font-bold"
+              style={{ fontFamily: "'Syne', sans-serif", color: '#F4F4F5' }}
             >
-              Cancelar
-            </button>
-            <button
-              onClick={confirmDejarCon}
-              disabled={!explanation.trim()}
-              className="flex-1 rounded-xl py-2.5 text-sm font-semibold disabled:opacity-40"
-              style={{ background: '#F59E0B', color: '#0A0A0F' }}
-            >
-              Confirmar
-            </button>
-          </div>
-        </motion.div>
+              ¿Por qué lo dejás?
+            </p>
+            <textarea
+              value={explanation}
+              onChange={e => setExplanation(e.target.value)}
+              placeholder="Justificá el motivo..."
+              rows={3}
+              autoFocus
+              className="rounded-xl px-4 py-3 text-sm outline-none resize-none"
+              style={{ background: '#0A0A0F', border: '1px solid #1E1E2E', color: '#F4F4F5' }}
+              onFocus={e => { e.target.style.borderColor = '#7C3AED'; e.target.style.boxShadow = '0 0 0 3px rgba(124,58,237,0.1)' }}
+              onBlur={e => { e.target.style.borderColor = '#1E1E2E'; e.target.style.boxShadow = 'none' }}
+            />
+            <div className="flex gap-3">
+              <button
+                onClick={() => { setPendingAction(null); setExplanation('') }}
+                className="flex-1 rounded-xl py-3.5 text-sm font-medium"
+                style={{ background: '#1E1E2E', color: '#71717A' }}
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmDejarCon}
+                disabled={!explanation.trim()}
+                className="flex-1 rounded-xl py-3.5 text-sm font-semibold disabled:opacity-40"
+                style={{ background: '#F59E0B', color: '#0A0A0F' }}
+              >
+                Confirmar
+              </button>
+            </div>
+          </motion.div>
+        </div>
       )}
 
       {/* Botones de acción */}
