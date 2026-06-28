@@ -49,15 +49,16 @@ export default function SwipeCard({ object, uploaderName, onResolve, resolving }
   }
 
   return (
-    <div className="flex-1 flex flex-col px-4 pb-4 gap-3">
+    <div className="flex-1 overflow-y-auto px-4 pb-4">
+      <div className="flex flex-col gap-3 min-h-full justify-between">
 
       {/* Card del objeto */}
       <div
-        className="flex-1 flex flex-col rounded-2xl overflow-hidden glow-accent"
-        style={{ background: '#111118', border: '1px solid #1E1E2E', minHeight: 0 }}
+        className="flex flex-col rounded-2xl overflow-hidden glow-accent"
+        style={{ background: '#111118', border: '1px solid #1E1E2E' }}
       >
         {/* Foto */}
-        <div className="relative overflow-hidden" style={{ background: '#0A0A0F', flex: 1, minHeight: 0, maxHeight: '44vh' }}>
+        <div className="relative overflow-hidden" style={{ background: '#0A0A0F', height: '38vh', minHeight: '160px', maxHeight: '260px' }}>
           {object.image_url ? (
             <img src={object.image_url} alt={object.name} className="w-full h-full object-cover" />
           ) : (
@@ -181,9 +182,11 @@ export default function SwipeCard({ object, uploaderName, onResolve, resolving }
         </div>
       )}
 
-      <p className="text-center text-xs" style={{ color: '#3F3F46' }}>
+      <p className="text-center text-xs pt-1" style={{ color: '#3F3F46' }}>
         * Dejar con justificación
       </p>
+
+      </div>
     </div>
   )
 }
