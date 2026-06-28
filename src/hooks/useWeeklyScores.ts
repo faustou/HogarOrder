@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { getMondayOfCurrentWeek } from '../lib/rules'
+import { getMondayOfCurrentWeek, getSundayOfCurrentWeek } from '../lib/rules'
 
 export interface WeeklyUserScore {
   id: string
@@ -26,10 +26,13 @@ export function useWeeklyScores(): WeeklyScores & { refetch: () => void } {
 
   const fetch = useCallback(async () => {
     const weekStart = getMondayOfCurrentWeek()
+    const weekEnd = getSundayOfCurrentWeek()
 
     const [usersRes, txRes, configRes] = await Promise.all([
       supabase.from('users').select('id, name, total_points'),
-      supabase.from('point_transactions').select('user_id, points').eq('week_start', weekStart),
+      supabase.from('point_transactions').select('user_id, points')
+        .gte('week_start', weekStart)
+        .lte('week_start', weekEnd),
       supabase.from('app_config').select('value').eq('key', 'weekly_objective').single(),
     ])
 

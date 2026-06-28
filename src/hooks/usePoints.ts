@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabase'
-import { getMondayOfCurrentWeek } from '../lib/rules'
+import { getMondayOfCurrentWeek, getSundayOfCurrentWeek } from '../lib/rules'
 import type { UserStats } from '../types'
 
 export function usePoints(userId: string) {
@@ -9,6 +9,7 @@ export function usePoints(userId: string) {
 
   const fetch = useCallback(async () => {
     const weekStart = getMondayOfCurrentWeek()
+    const weekEnd = getSundayOfCurrentWeek()
 
     const [uploadsRes, resolutionsRes, weeklyRes] = await Promise.all([
       supabase
@@ -24,7 +25,8 @@ export function usePoints(userId: string) {
         .from('point_transactions')
         .select('points')
         .eq('user_id', userId)
-        .eq('week_start', weekStart),
+        .gte('week_start', weekStart)
+        .lte('week_start', weekEnd),
     ])
 
     const weeklyPoints = (weeklyRes.data ?? []).reduce((sum, t) => sum + t.points, 0)
