@@ -6,6 +6,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import Swipe from './pages/Swipe'
 import Upload from './pages/Upload'
+import History from './pages/History'
 import BottomNav, { type Page } from './components/BottomNav'
 import type { UserProfile } from './types'
 
@@ -70,6 +71,7 @@ function AppShell({ profile, page, setPage }: {
             onSuccess={() => { refetchScores(); setPage('home') }}
           />
         )}
+        {page === 'history' && <History profile={profile} />}
       </div>
 
       <BottomNav current={page} onChange={setPage} />

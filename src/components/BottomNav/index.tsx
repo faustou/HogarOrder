@@ -1,15 +1,12 @@
-export type Page = 'home' | 'swipe' | 'upload'
+export type Page = 'home' | 'swipe' | 'upload' | 'history'
 
-interface Tab {
-  page: Page
-  label: string
-  icon: string
-}
+interface Tab { page: Page; label: string; icon: string }
 
 const TABS: Tab[] = [
-  { page: 'home',   label: 'Inicio',   icon: '⚡' },
-  { page: 'swipe',  label: 'Resolver', icon: '🃏' },
-  { page: 'upload', label: 'Cargar',   icon: '＋' },
+  { page: 'home',    label: 'Inicio',    icon: '⚡' },
+  { page: 'swipe',   label: 'Resolver',  icon: '🃏' },
+  { page: 'upload',  label: 'Cargar',    icon: '＋' },
+  { page: 'history', label: 'Historial', icon: '📜' },
 ]
 
 interface BottomNavProps {
@@ -41,10 +38,7 @@ export default function BottomNav({ current, onChange }: BottomNavProps) {
             >
               {tab.icon}
             </span>
-            <span
-              className="text-[10px] font-medium tracking-wide"
-              style={{ fontFamily: "'Inter', sans-serif" }}
-            >
+            <span className="text-[10px] font-medium tracking-wide">
               {tab.label}
             </span>
           </button>
